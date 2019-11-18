@@ -1,0 +1,29 @@
+.carousal{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  overflow-x: hidden;
+  .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    .MuiButton-root {
+      font-size: 48px;
+      font-weight: bold;
+      line-height: 0.5;
+    }
+  }
+  .carousal-slides{
+    display: flex;
+    flex-direction: row;
+    transition: all 0.5s ease-in;
+    .carousal-item {
+      min-width: 288px;
+      .MuiCard-root {
+        background-color: #282c34;
+        color: white;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

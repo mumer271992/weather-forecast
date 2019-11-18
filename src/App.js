@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+
+import Home from './components/Home/HomeHOC';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    const { loading } = this.props;
+
+    return (
+      <div className="App">
+        <Home />
+        {
+          loading && (
+            <div className="loader">
+              <h3>loading...</h3>
+            </div>
+          )
+        }
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    loading: state.forecast.loading
+  }
+};
+
+export default connect(mapStateToProps, null)(App);
