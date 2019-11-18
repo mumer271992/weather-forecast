@@ -1,22 +1,13 @@
 import actionTypes from '../../helpers/actiontypes';
 // Fahrenheit use units=imperial
 // Celsius use units=metric
-let saved = localStorage.getItem('weather');
-saved = saved ? JSON.parse(saved) : {};
 
 const defaultState = {
   loading: false,
-  temperatureUnit: saved.forecast && saved.forecast.temperatureUnit ? saved.forecast.temperatureUnit : 'metric',
-  forecast: saved.forecast && saved.forecast.forecast ? saved.forecast.forecast : [],
+  temperatureUnit: 'metric',
+  forecast: [],
   selectedIndex: 0,
 };
-
-// const defaultState = {
-//   loading: false,
-//   temperatureUnit: 'metric',
-//   forecast: [],
-//   selectedIndex: 0,
-// };
 
 export default (state = defaultState, action) => {
   switch (action.type) {

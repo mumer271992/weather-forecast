@@ -32,27 +32,19 @@ export const selectIndex = (index) => {
 export const fetchForecast = (unit) => {
   return (dispatch) => {
     dispatch(startLoading());
-    setTimeout(() => {
-      // dispatch(saveForecast(arr, unit));
-      dispatch(stopLoading());
-    }, 2000);
-  // api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=1a1c7c80e65078165ef7f68ca56ebdf0
-    // dispatch(startLoading());
-    // axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=Munich,de&units=${unit}&APPID=1a1c7c80e65078165ef7f68ca56ebdf0&cnt=40`)
-    //   .then(function (response) {
-    //     // handle success
-    //     console.log("success");
-    //     const arr = mapData(response)
-    //     console.log(arr);
-    //     dispatch(saveForecast(arr, unit));
-    //     dispatch(stopLoading());
-    //   })
-    //   .catch(function (error) {
-    //     // handle error
-    //     console.log("error");
-    //     console.log(error);
-    //     dispatch(stopLoading());
-    //   });
+    axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=Munich,de&units=${unit}&APPID=1a1c7c80e65078165ef7f68ca56ebdf0&cnt=40`)
+      .then(function (response) {
+        // handle success
+        const arr = mapData(response)
+        console.log(arr);
+        dispatch(saveForecast(arr, unit));
+        dispatch(stopLoading());
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        dispatch(stopLoading());
+      });
   }
 }
 
