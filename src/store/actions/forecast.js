@@ -32,7 +32,7 @@ export const selectIndex = (index) => {
 export const fetchForecast = (unit) => {
   return (dispatch) => {
     dispatch(startLoading());
-    axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=Munich,de&units=${unit}&APPID=1a1c7c80e65078165ef7f68ca56ebdf0&cnt=40`)
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Munich,de&units=${unit}&APPID=1a1c7c80e65078165ef7f68ca56ebdf0&cnt=40`)
       .then(function (response) {
         // handle success
         const arr = mapData(response)
