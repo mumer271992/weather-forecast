@@ -31,5 +31,5 @@ describe('actions creators should return proper actions', () => {
     }
     expect(selectIndex(1)).toEqual(expectedAction);
   });
-  // TODO: test async action creators
+  // TODO: test async action creators using moxios
 });
