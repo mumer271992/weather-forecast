@@ -18,7 +18,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     const { fetchforecast } = this.props;
-    // fetchforecast(this.state.selectedTemp);
+    fetchforecast(this.state.selectedTemp);
   }
 
   onChangeHandler(e) {
@@ -35,7 +35,7 @@ class Home extends React.Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        <div>Weather Forecast App</div>
+        <div className="header">Weather Forecast App</div>
         <Container maxWidth="md" data-test="main-container">
           <Card>
             <CardContent>
