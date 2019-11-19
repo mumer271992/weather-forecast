@@ -32,33 +32,37 @@ export const selectIndex = (index) => {
 export const fetchForecast = (unit) => {
   return (dispatch) => {
     dispatch(startLoading());
-    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Munich,de&units=${unit}&APPID=${process.env.REACT_APP_OPEN_WEATHER_API_ID}&cnt=40`)
+    return axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Munich,de&units=${unit}&APPID=${process.env.REACT_APP_OPEN_WEATHER_API_ID}&cnt=40`)
       .then(function (response) {
         // handle success
         const arr = mapData(response)
-        console.log(arr);
         dispatch(saveForecast(arr, unit));
         dispatch(stopLoading());
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+        console.log(error.message);
         dispatch(stopLoading());
       });
   }
 }
 
 const mapData = (response) => {
-  const list = response.data.list;
+  const list = response && response.data && response.data.list ? response.data.list : [];
   let map = {};let arr = [];
   list.forEach((item) => {
-    const date = item.dt_txt.split(' ');
-    let group = map[date[0]];
-    if (!group) {
-      group = [];
+    let date;let group;
+    if (item && item.dt_txt) {
+      date = item.dt_txt.split(' ');
     }
-    group.push(item);
-    map[date[0]] = group;
+    if (date && date.length > 0) {
+      group = map[date[0]];
+      if (!group) {
+        group = [];
+      }
+      group.push(item);
+      map[date[0]] = group;
+    }
   });
   let keys = Object.keys(map);
   keys.forEach((key) => {
